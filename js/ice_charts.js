@@ -7,10 +7,19 @@ ol.proj.addProjection(proj32661);
 
 var ext = ex32661;
 var prj = proj32661;
-var defzoom = 4;
 
 // Import variables from php: array(address, id, layers)
-var prinfoQ1 = Drupal.settings.prinfoQ1;
+//var prinfoQ1 = Drupal.settings.prinfoQ1;
+
+function getSelectedDateFromSliderValue(sliderValue) {
+
+  // 1970-01-01:00:00:00Z
+  var selectedDate = new Date(0);
+  selectedDate.setUTCDate(selectedDate.getUTCDate() + sliderValue);
+  
+  selectedDate.setUTCHours(14);
+  return selectedDate;
+}
 
 var layer = {};
 
@@ -31,15 +40,15 @@ layer['border']  = new ol.layer.Tile({
    })
 });
 
+var initiallySelectedDate = getSelectedDateFromSliderValue(parseInt(document.getElementById('ic-slider').value)); 
 
 layer['ic']  = new ol.layer.Tile({
-       title: '2010-11-04',
        source: new ol.source.TileWMS({
        url: "http://thredds.met.no/thredds/wms/sea_ice/SIW-METNO-ARC-SEAICE_HR-OBS/ice_conc_svalbard_aggregated?version%3D1.3.0",
        params: {'LAYERS': 'ice_concentration', 
                 'TRANSPARENT':'true', 
                 'FORMAT':'image/png', 
-                'TIME':"2010-11-04T14:00:00.000Z",
+                'TIME': initiallySelectedDate.toISOString(),
                 'CRS':'EPSG:32661', 
                 'VERSION':'1.3.0', 
                 'SERVICE':'WMS',
@@ -47,27 +56,9 @@ layer['ic']  = new ol.layer.Tile({
                 'TILE':'true','WIDTH':'256','HEIGHT':'256'}
    })
 });
-
-//2010-01-04T14:00:00.000Z,2010-01-05T14:00:00.000Z,2010-01-06T14:00:00.000Z,2010-01-07T14:00:00.000Z,2010-01-08T14:00:00.000Z,2010-01-11T14:00:00.000Z,2010-01-12T14:00:00.000Z,2010-01-13T14:00:00
-layer['ic2']  = new ol.layer.Tile({
-       title: '2010-01-13',
-       source: new ol.source.TileWMS({
-       url: "http://thredds.met.no/thredds/wms/sea_ice/SIW-METNO-ARC-SEAICE_HR-OBS/ice_conc_svalbard_aggregated?version%3D1.3.0",
-       params: {'LAYERS': 'ice_concentration', 
-                'TRANSPARENT':'true', 
-                'FORMAT':'image/png', 
-                'TIME':"2010-01-13T14:00:00.000Z",
-                'CRS':'EPSG:32661', 
-                'VERSION':'1.3.0', 
-                'SERVICE':'WMS',
-                'REQUEST':'GetMap',
-                'TILE':'true','WIDTH':'256','HEIGHT':'256'}
-   })
-});
-
 
 // build up the map 
-var centerLonLat1 = [15, 80];
+var centerLonLat1 = [15, 73];
 var centerTrans1 = ol.proj.transform(centerLonLat1, "EPSG:4326",  prj);
 
 var map = new ol.Map({
@@ -76,21 +67,34 @@ var map = new ol.Map({
    ]),
    target: 'map',
    layers: [ layer['base'],
-             layer['ic'],
-             layer['ic2']
+             layer['ic']
            ],
    view: new ol.View({
-                 zoom: 4, 
-                 minZoom: 3,
+                 zoom: 3, 
+                 minZoom: 1,
                  maxZoom: 7,
                  center: centerTrans1,
                  projection: prj
    })
 });
 
-//Layer switcher
-var layerSwitcher = new ol.control.LayerSwitcher({});
-map.addControl(layerSwitcher);
+function printDate(selectedDate){
+
+  var comment = '';
+  if (selectedDate.getDay() == 0 || selectedDate.getDay() == 6){
+    comment = ' - <strong>Ice charts are not produced during weekends</strong>';
+  }
+  document.getElementById('boxDate').innerHTML = selectedDate.toISOString()+comment;
+}
+
+printDate(initiallySelectedDate);
+
+// inside this function "this" = document.getElementById('ic-slider')
+document.getElementById('ic-slider').onchange = function(event){
+  var newSelectedDate = getSelectedDateFromSliderValue(parseInt(this.value));
+  layer['ic'].getSource().updateParams({'TIME': newSelectedDate.toISOString()});
+  printDate(newSelectedDate);
+}
 
 //Mouseposition
 var mousePositionControl = new ol.control.MousePosition({
@@ -101,10 +105,6 @@ var mousePositionControl = new ol.control.MousePosition({
 });
 map.addControl(mousePositionControl);
 
-//Layer switcher
-//var lswitcher = new ol.control.LayerSwitcher({targer:$(".layerSwithcer").get(0),});
-var lswitcher = new ol.control.LayerSwitcher({});
-map.addControl(lswitcher);
 
 //Mouseposition
 var mousePositionControl = new ol.control.MousePosition({
@@ -114,6 +114,4 @@ var mousePositionControl = new ol.control.MousePosition({
    projection : 'EPSG:4326', 
 });
 map.addControl(mousePositionControl);
-
-
 
