@@ -78,23 +78,26 @@ var map = new ol.Map({
    })
 });
 
-function printDate(selectedDate){
+function printDate(selectedDate, layer){
 
   var comment = '';
   if (selectedDate.getDay() == 0 || selectedDate.getDay() == 6){
     comment = ' - <strong>Ice charts are not produced during weekends</strong>';
+    layer.setVisible(false);
+  }else{
+    layer.setVisible(true);
   }
   document.getElementById('boxDate').innerHTML = selectedDate.toISOString()+comment;
-  jQuery('#datepicker').datepicker("setDate",selectedDate.toISOString());
 }
 
-printDate(initiallySelectedDate);
+printDate(initiallySelectedDate, layer['ic']);
 
 // inside this function "this" = document.getElementById('ic-slider')
 document.getElementById('ic-slider').onchange = function(event){
   var newSelectedDate = getSelectedDateFromSliderValue(parseInt(this.value));
   layer['ic'].getSource().updateParams({'TIME': newSelectedDate.toISOString()});
-  printDate(newSelectedDate);
+  jQuery('#datepicker').datepicker("setDate",newSelectedDate.toISOString());
+  printDate(newSelectedDate, layer['ic']);
 }
 
 //Mouseposition
