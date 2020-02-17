@@ -1,11 +1,11 @@
-// WGS 84 / UPS North (N,E)
 proj4.defs('EPSG:32661', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs');
-var proj32661 = ol.proj.get('EPSG:32661');
-var ex32661 = [-4e+06,-6e+06,8e+06,8e+06];
-proj32661.setExtent(ex32661);
-ol.proj.addProjection(proj32661);
+ol.proj.proj4.register(proj4);
 
-var ext = ex32661;
+var proj32661 = new ol.proj.Projection({
+  code: 'EPSG:32661',
+  extent: [-4e+06,-6e+06,8e+06,8e+06]
+});
+
 var prj = proj32661;
 
 // Import variables from php: array(address, id, layers)
@@ -28,7 +28,7 @@ layer['base']  = new ol.layer.Tile({
    type: 'base',
    source: new ol.source.TileWMS({ 
        url: 'http://public-wms.met.no/backgroundmaps/northpole.map',
-       params: {'LAYERS': 'world', 'TRANSPARENT':'false', 'VERSION':'1.1.1','FORMAT':'image/png', 'SRS':prj}
+       params: {'LAYERS': 'world', 'TRANSPARENT':'true', 'VERSION':'1.1.1','FORMAT':'image/png', 'SRS':prj}
    })
 });
 
@@ -44,7 +44,7 @@ var initiallySelectedDate = getSelectedDateFromSliderValue(parseInt(document.get
 
 layer['ic']  = new ol.layer.Tile({
        source: new ol.source.TileWMS({
-       url: "http://thredds.met.no/thredds/wms/sea_ice/SIW-METNO-ARC-SEAICE_HR-OBS/ice_conc_svalbard_aggregated?version%3D1.3.0",
+       url: "https://thredds.met.no/thredds/wms/sea_ice/SIW-METNO-ARC-SEAICE_HR-OBS/ice_conc_svalbard_aggregated?version%3D1.3.0",
        params: {'LAYERS': 'ice_concentration', 
                 'TRANSPARENT':'true', 
                 'FORMAT':'image/png', 
@@ -66,8 +66,8 @@ var map = new ol.Map({
       new ol.control.FullScreen()
    ]),
    target: 'map',
-   layers: [ layer['base'],
-             layer['ic']
+   layers: [ layer['ic'],
+             layer['base']
            ],
    view: new ol.View({
                  zoom: 3, 
@@ -85,6 +85,7 @@ function printDate(selectedDate){
     comment = ' - <strong>Ice charts are not produced during weekends</strong>';
   }
   document.getElementById('boxDate').innerHTML = selectedDate.toISOString()+comment;
+  jQuery('#datepicker').datepicker("setDate",selectedDate.toISOString());
 }
 
 printDate(initiallySelectedDate);
@@ -114,4 +115,3 @@ var mousePositionControl = new ol.control.MousePosition({
    projection : 'EPSG:4326', 
 });
 map.addControl(mousePositionControl);
-

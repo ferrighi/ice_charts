@@ -1,20 +1,6 @@
 <?php
 
 function ice_charts_init(){
-  $mpath = drupal_get_path('module', 'ice_charts');
-  $ol3_path = libraries_get_path('openlayers3');
-  $jq_path = drupal_get_path('module', 'jquery_update');
-
-  drupal_add_css($mpath . '/css/ice_charts_style.css');
-  drupal_add_css($ol3_path . '/css/ol.css');
-  drupal_add_css($ol3_path . '/apidoc/styles/bootstrap.min.css');
-
-  //drupal_add_js($jq_path . '/replace/jquery/1.10/jquery.min.js');
-  drupal_add_js($ol3_path . '/build/ol.js');
-  drupal_add_js($ol3_path . '/apidoc/scripts/bootstrap.min.js');
-  //drupal_add_js($mpath . '/js/ice_charts.js');
-
-    //<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
 }
 
 
@@ -41,35 +27,80 @@ function ice_charts_main_content(){
   global $base_url;
   global $metsis_conf;
   
-  $site_name = variable_get('site_name', 'Default');
-  $scr_name = $base_url ."/ice_charts";
   $mpath = drupal_get_path('module', 'ice_charts');
+  $ol3_path = libraries_get_path('openlayers5');
+  $jq_path = drupal_get_path('module', 'jquery_update');
+  drupal_add_js($jq_path . '/replace/ui/ui/jquery.ui.datepicker.js');
+  drupal_add_css($jq_path . '/replace/ui/themes/base/jquery.ui.datepicker.css');
 
+  drupal_add_css($mpath . '/css/ice_charts_style.css');
+  drupal_add_css($ol3_path . '/css/ol.css');
+  //drupal_add_css($ol3_path . '/apidoc/styles/bootstrap.min.css');
+
+  drupal_add_js($ol3_path . '/build/ol.js');
+  //drupal_add_js($ol3_path . '/apidoc/scripts/bootstrap.min.js');
+  drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js', 'external');
 
 return '
-
 <div id="map" class="map" >
 </div>
 
+
 <div class="controls">
+
+<label>Select a date with the time slider: </label>
+<script type="text/javascript">
+   var sliderStartDay = Math.floor(new Date("2010-01-04T14:00:00.000Z")/8.64e7).toString();
+   var nowOrYester = new Date();
+   if (nowOrYester.getUTCHours() < 14){
+     nowOrYester.setUTCDate(nowOrYester.getUTCDate() - 1);
+   }
+   var sliderEndDay = Math.floor(nowOrYester/8.64e7).toString();
+
+   document.write("<input id=\"ic-slider\" type=\"range\" min=\""
+                + sliderStartDay + "\" max=\"" + sliderEndDay
+                + "\" value=\"" + sliderEndDay + "\" />");
+</script>
+
+<label>Or, navigate on the calendar: </label>
+<button class="prev-day btn btn-outline-secondary"><i class="arrow left"></i></button>
+<input type="dateTime" id="datepicker"  name="datepicker" readonly="true">
+<button class="next-day btn btn-outline-secondary" ><i class="arrow right"></i></button>
+
+<script type="text/javascript">
+
+   function datepicker_onchange (newDate) {
+       var new_day = Math.floor(newDate/8.64e7).toString();
+       document.getElementById("ic-slider").value = new_day;
+       jQuery("#ic-slider").trigger("change");
+   } 
+
+   jQuery("#datepicker").datepicker({dateFormat: "yy-mm-ddT14:00:00.000Z"});
+   jQuery("#datepicker").on("change", function() {
+       datepicker_onchange(Date.parse(this.value));
+   });
+
+   jQuery(".next-day").on("click", function () {
+       var date = jQuery("#datepicker").datepicker("getDate");
+       date.setDate(date.getDate() +1)
+       jQuery("#datepicker").datepicker("setDate", date);
+       datepicker_onchange(date);
+   });
+   jQuery(".prev-day").on("click", function () {
+       var date = jQuery("#datepicker").datepicker("getDate");
+       date.setDate(date.getDate() -1)
+       jQuery("#datepicker").datepicker("setDate", date);
+       datepicker_onchange(date);
+   });
+</script>
+
     <label>Acquisition: </label>
     <div id="boxDate"></div>
-    <script type="text/javascript">
-       var sliderStartDay = Math.floor(new Date("2010-01-04T14:00:00.000Z")/8.64e7).toString();
-       var nowOrYester = new Date();
-       if (nowOrYester.getUTCHours() < 14){
-         nowOrYester.setUTCDate(nowOrYester.getUTCDate() - 1);
-       }
-       var sliderEndDay = Math.floor(nowOrYester/8.64e7).toString();
 
-       document.write("<input id=\"ic-slider\" type=\"range\" min=\""
-                    + sliderStartDay + "\" max=\"" + sliderEndDay
-                    + "\" value=\"" + sliderEndDay + "\" />");
-    </script>
 </div>
    <script type="text/javascript" src="/'.$mpath.'/js/ice_charts.js"></script>
 <center>
-
+<br>
 <table style="width:50%">
    <tr align=center><th>Colour</th><th>Total Concentration</th></tr>
    <tr align=center><td bgcolor= #969696></td><td>Fast Ice</td></tr>

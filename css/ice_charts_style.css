@@ -1,13 +1,45 @@
+.block-ice-charts i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.block-ice-charts .right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.block-ice-charts .left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 .block-ice-charts .map {
   width: 100%;
   height: 100%;
   margin: auto;
+  background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.block-ice-charts #boxDate {
-  display: inline;
+.block-ice-charts #ic-slider {
+  width: 100%;
 }
+
+.block-ice-charts .controls {
+  margin-top: 1.5em;
+}
+
+.block-ice-charts #ic-slider::-moz-range-thumb  {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%; 
+    border-color: #000;
+    border-width: 0.1em;
+    cursor: pointer;
+}
+
 .block-ice-charts .map:-moz-full-screen {
   height: 100%;
 }
@@ -57,13 +89,6 @@
    border-bottom: unset;
    height: 2em;
 }
-.block-ice-charts #info {
-  height: 1px;
-  width: 1px;
-  z-index: 100;
-  /*left: 200px;
-  top: 100px;*/
-}
 .block-ice-charts .ol-mouse-position {
    top: 5%;
    left: 5%;
@@ -74,30 +99,6 @@
 .block-ice-charts #tooltip {
    font-weight: bold;
    padding: 5px;
-}
-.block-ice-charts .progress-container {
-  width:100%;
-  height: 15px;
-}
-.block-ice-charts #progress {
-  position: relative;
-  height: 15px;
-  background: -webkit-linear-gradient(left, #dcdcdc 0%, #7593b9 100%);
-  width: 0%;
-  max-width: 100%;
-  transition: width 250ms;
-}
-.block-ice-charts .ol-timeline {
-  font-size: large;
-}
-.block-ice-charts .ol-scroll {
-  height: 3em !important;
-}
-.block-ice-charts .ol-time {
-  color: black !important;
-}
-.block-ice-charts .ol-times {
-  background-color: unset !important;
 }
 .block-ice-charts .ol-viewport {
   border: 1px #bbb solid;

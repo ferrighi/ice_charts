@@ -2,6 +2,4 @@ name = Ice Charts
 description = "Display ice charts"
 core = 7.x
 
-scripts[] = js/ice_charts.js
-
 dependencies[] = libraries
