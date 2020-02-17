@@ -1,3 +1,9 @@
+.block-ice-charts .btn {
+  all: unset;
+  border-radius: 5px;
+  padding: 3px 10px;
+  box-shadow: 0px 1px 2px #939da2;
+}
 .block-ice-charts i {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -25,6 +31,11 @@
 
 .block-ice-charts #ic-slider {
   width: 100%;
+  background-color: white;
+}
+
+.block-ice-charts input[type="range"] {
+  all: unset;
 }
 
 .block-ice-charts .controls {
