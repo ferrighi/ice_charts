@@ -71,23 +71,28 @@ return '
 
    function datepicker_onchange (newDate) {
        var new_day = Math.floor(newDate/8.64e7).toString();
-       document.getElementById("ic-slider").value = new_day;
-       jQuery("#ic-slider").trigger("change");
+       if (document.getElementById("ic-slider").value != new_day) {
+           document.getElementById("ic-slider").value = new_day;
+           jQuery("#ic-slider").trigger("change");
+       }
    } 
 
    jQuery("#datepicker").datepicker({dateFormat: "yy-mm-ddT14:00:00.000Z"});
+   var fill_picker = new Date(parseInt(document.getElementById("ic-slider").value)*8.64e7);
+   fill_picker.setUTCHours(14);
+   jQuery("#datepicker").datepicker("setDate", fill_picker);
    jQuery("#datepicker").on("change", function() {
-       datepicker_onchange(Date.parse(this.value));
+       datepicker_onchange(new Date(this.value));
    });
 
    jQuery(".next-day").on("click", function () {
-       var date = jQuery("#datepicker").datepicker("getDate");
+       var date = new Date(document.getElementById("datepicker").value);
        date.setDate(date.getDate() +1)
        jQuery("#datepicker").datepicker("setDate", date);
        datepicker_onchange(date);
    });
    jQuery(".prev-day").on("click", function () {
-       var date = jQuery("#datepicker").datepicker("getDate");
+       var date = new Date(document.getElementById("datepicker").value);
        date.setDate(date.getDate() -1)
        jQuery("#datepicker").datepicker("setDate", date);
        datepicker_onchange(date);
