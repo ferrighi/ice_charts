@@ -1,3 +1,16 @@
+#boxDate {
+  font-size: large;
+  color: red;
+  padding: 1em;
+}
+
+.block-ice-charts .btn {
+  all: unset;
+  border-radius: 5px;
+  padding: 3px 10px;
+  box-shadow: 0px 1px 2px #939da2;
+}
+
 .block-ice-charts i {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -25,6 +38,11 @@
 
 .block-ice-charts #ic-slider {
   width: 100%;
+  background-color: white;
+}
+
+.block-ice-charts input[type="range"] {
+ all: unset;
 }
 
 .block-ice-charts .controls {
@@ -64,42 +82,18 @@
      left: auto;
 }
 
-.block-ice-charts .drop-selection {
-   height: 30px !important;
-   display: inline !important;
-   margin-right: auto;
-   margin-left: auto;
-}
-
 .block-ice-charts .ol-mouse-position {
-     top: 95%;
-     left: 2%;
-}
-
-.block-ice-charts ul.primary li.active a {
-   background-color: gainsboro;
+   top: 95%;
+   left: 2%;
+   color: white;
    font-weight: bold;
-   border: 1px gainsboro solid;
-   border-bottom: unset;
-   height: 2em;
+   text-shadow: 1px 1px 1px black;
 }
-.block-ice-charts ul.primary li a {
-   background-color: white;
-   border: 1px gainsboro solid;
-   border-bottom: unset;
-   height: 2em;
-}
-.block-ice-charts .ol-mouse-position {
-   top: 5%;
-   left: 5%;
-}
+
 .block-ice-charts .ol-overlay-container {
   position: unset !important;
 }
-.block-ice-charts #tooltip {
-   font-weight: bold;
-   padding: 5px;
-}
+
 .block-ice-charts .ol-viewport {
   border: 1px #bbb solid;
 }

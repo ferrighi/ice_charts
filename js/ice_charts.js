@@ -78,16 +78,18 @@ var map = new ol.Map({
    })
 });
 
+
 function printDate(selectedDate, layer){
 
   var comment = '';
   if (selectedDate.getDay() == 0 || selectedDate.getDay() == 6){
-    comment = ' - <strong>Ice charts are not produced during weekends</strong>';
-    layer.setVisible(false);
+    comment = ' <strong>Ice charts are not produced during weekends</strong>';
+    //layer.setVisible(false);
   }else{
-    layer.setVisible(true);
+    //layer.setVisible(true);
   }
-  document.getElementById('boxDate').innerHTML = selectedDate.toISOString()+comment;
+  //document.getElementById('boxDate').innerHTML = selectedDate.toISOString()+comment;
+  document.getElementById('boxDate').innerHTML = comment;
 }
 
 printDate(initiallySelectedDate, layer['ic']);
@@ -96,6 +98,7 @@ printDate(initiallySelectedDate, layer['ic']);
 document.getElementById('ic-slider').onchange = function(event){
   var newSelectedDate = getSelectedDateFromSliderValue(parseInt(this.value));
   layer['ic'].getSource().updateParams({'TIME': newSelectedDate.toISOString()});
+  layer['ic'].getSource().refresh();
   jQuery('#datepicker').datepicker("setDate",newSelectedDate.toISOString());
   printDate(newSelectedDate, layer['ic']);
 }
@@ -109,12 +112,3 @@ var mousePositionControl = new ol.control.MousePosition({
 });
 map.addControl(mousePositionControl);
 
-
-//Mouseposition
-var mousePositionControl = new ol.control.MousePosition({
-   coordinateFormat : function(co) {
-      return ol.coordinate.format(co, template = 'lon: {x}, lat: {y}', 2);
-   },
-   projection : 'EPSG:4326', 
-});
-map.addControl(mousePositionControl);

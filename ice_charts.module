@@ -35,10 +35,8 @@ function ice_charts_main_content(){
 
   drupal_add_css($mpath . '/css/ice_charts_style.css');
   drupal_add_css($ol3_path . '/css/ol.css');
-  //drupal_add_css($ol3_path . '/apidoc/styles/bootstrap.min.css');
 
   drupal_add_js($ol3_path . '/build/ol.js');
-  //drupal_add_js($ol3_path . '/apidoc/scripts/bootstrap.min.js');
   drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js', 'external');
 
 return '
@@ -63,9 +61,11 @@ return '
 </script>
 
 <label>Or, navigate on the calendar: </label>
+<button class="prev-month btn btn-outline-secondary" ><i class="arrow left"></i><i class="arrow left"></i></button>
 <button class="prev-day btn btn-outline-secondary"><i class="arrow left"></i></button>
 <input type="dateTime" id="datepicker"  name="datepicker" readonly="true">
 <button class="next-day btn btn-outline-secondary" ><i class="arrow right"></i></button>
+<button class="next-month btn btn-outline-secondary" ><i class="arrow right"></i><i class="arrow right"></i></button>
 
 <script type="text/javascript">
 
@@ -91,15 +91,27 @@ return '
        jQuery("#datepicker").datepicker("setDate", date);
        datepicker_onchange(date);
    });
+   jQuery(".next-month").on("click", function () {
+       var date = new Date(document.getElementById("datepicker").value);
+       date.setMonth(date.getMonth() + 1);
+       jQuery("#datepicker").datepicker("setDate", date);
+       datepicker_onchange(date);
+   });
    jQuery(".prev-day").on("click", function () {
        var date = new Date(document.getElementById("datepicker").value);
        date.setDate(date.getDate() -1)
        jQuery("#datepicker").datepicker("setDate", date);
        datepicker_onchange(date);
    });
+   jQuery(".prev-month").on("click", function () {
+       var date = new Date(document.getElementById("datepicker").value);
+       date.setMonth(date.getMonth() -1);
+       jQuery("#datepicker").datepicker("setDate", date);
+       datepicker_onchange(date);
+   });
 </script>
 
-    <label>Acquisition: </label>
+    <!--label>Acquisition: </label-->
     <div id="boxDate"></div>
 
 </div>
