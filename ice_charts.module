@@ -61,11 +61,11 @@ return '
 </script>
 
 <label>Or, navigate on the calendar: </label>
-<button class="prev-month btn btn-outline-secondary" ><i class="arrow left"></i><i class="arrow left"></i></button>
-<button class="prev-day btn btn-outline-secondary"><i class="arrow left"></i></button>
+<button title="previous month" class="prev-month btn btn-outline-secondary" ><i class="arrow left"></i><i class="arrow left"></i></button>
+<button title="previous day" class="prev-day btn btn-outline-secondary"><i class="arrow left"></i></button>
 <input type="dateTime" id="datepicker"  name="datepicker" readonly="true">
-<button class="next-day btn btn-outline-secondary" ><i class="arrow right"></i></button>
-<button class="next-month btn btn-outline-secondary" ><i class="arrow right"></i><i class="arrow right"></i></button>
+<button title="next day" class="next-day btn btn-outline-secondary" ><i class="arrow right"></i></button>
+<button title="next month" class="next-month btn btn-outline-secondary" ><i class="arrow right"></i><i class="arrow right"></i></button>
 
 <script type="text/javascript">
 
