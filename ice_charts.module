@@ -28,15 +28,15 @@ function ice_charts_main_content(){
   global $metsis_conf;
   
   $mpath = drupal_get_path('module', 'ice_charts');
-  $ol3_path = libraries_get_path('openlayers5');
+  $ol5_path = libraries_get_path('openlayers5');
   $jq_path = drupal_get_path('module', 'jquery_update');
   drupal_add_js($jq_path . '/replace/ui/ui/jquery.ui.datepicker.js');
   drupal_add_css($jq_path . '/replace/ui/themes/base/jquery.ui.datepicker.css');
 
   drupal_add_css($mpath . '/css/ice_charts_style.css');
-  drupal_add_css($ol3_path . '/css/ol.css');
+  drupal_add_css($ol5_path . '/css/ol.css');
 
-  drupal_add_js($ol3_path . '/build/ol.js');
+  drupal_add_js($ol5_path . '/build/ol.js');
   drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js', 'external');
 
 return '
