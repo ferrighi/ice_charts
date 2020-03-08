@@ -30,6 +30,7 @@ function ice_charts_main_content(){
   $mpath = drupal_get_path('module', 'ice_charts');
   $ol5_path = libraries_get_path('openlayers5');
   $jq_path = drupal_get_path('module', 'jquery_update');
+  drupal_add_js($jq_path . '/replace/ui/ui/jquery.ui.core.js');
   drupal_add_js($jq_path . '/replace/ui/ui/jquery.ui.datepicker.js');
   drupal_add_css($jq_path . '/replace/ui/themes/base/jquery.ui.datepicker.css');
 
