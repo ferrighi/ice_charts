@@ -53,6 +53,7 @@ layer['ic']  = new ol.layer.Tile({
                 'VERSION':'1.3.0', 
                 'SERVICE':'WMS',
                 'REQUEST':'GetMap',
+	        'STYLES': 'boxfill/wmo_ice_chart',
                 'TILE':'true','WIDTH':'256','HEIGHT':'256'}
    })
 });
