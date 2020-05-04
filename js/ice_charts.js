@@ -59,7 +59,7 @@ layer['ic']  = new ol.layer.Tile({
 });
 
 // build up the map 
-var centerLonLat1 = [15, 73];
+var centerLonLat1 = [15, 78];
 var centerTrans1 = ol.proj.transform(centerLonLat1, "EPSG:4326",  prj);
 
 var map = new ol.Map({

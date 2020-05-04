@@ -5,7 +5,7 @@
 }
 
 .block-ice-charts .btn {
-  all: unset;
+  /*all: unset;*/
   border-radius: 5px;
   padding: 3px 10px;
   box-shadow: 0px 1px 2px #939da2;
@@ -38,7 +38,11 @@
 
 .block-ice-charts #ic-slider {
   width: 100%;
-  background-color: white;
+  background-color: #beb9d7;
+  border-radius: 1em;
+  height: 1em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
 }
 
 .block-ice-charts input[type="range"] {
@@ -47,6 +51,7 @@
 
 .block-ice-charts .controls {
   margin-top: 1.5em;
+  text-align: center;
 }
 
 .block-ice-charts #ic-slider::-moz-range-thumb  {
