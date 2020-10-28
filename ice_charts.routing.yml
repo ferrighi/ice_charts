@@ -1,0 +1,7 @@
+ice_charts:
+  path: '/ice_charts_client'
+  defaults:
+    _controller: '\Drupal\ice_charts\Controller\IceChartsController::build'
+    _title: 'Ice Charts Client'
+  requirements:
+    _permission: 'accsess content'  

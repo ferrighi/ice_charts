@@ -1,5 +1,8 @@
-name = Ice Charts
-description = "Display ice charts"
-core = 7.x
-
-dependencies[] = libraries
+name: 'Ice Charts'
+description: 'Visualization of Ice Charts'
+type: module
+core: 8.x
+version: 1.x
+package: METNO
+#configure: landing_page_creator.admin_config_form
+dependencies:
