@@ -39,20 +39,21 @@ class IceChartsBlock extends BlockBase implements BlockPluginInterface {
     ];
 
     $build['controls'] = [
-      '#prefix' => '<div class="controls w3-panel">',
+      '#prefix' => '<div class="controls w3-container w3-panel w3-padding-16 w3-card-4">',
       '#suffix' => '</div>'
     ];
     $build['controls']['label-slider'] = [
-      '#markup' => '<label>'. t('Select a date with the time slider:') . '</label>',
-      '#allowed_tags' => ['label'],
+      '#markup' => '<strong><label>'. t('Select a date with the time slider:') . '</label></strong>',
+      '#allowed_tags' => ['label', 'strong'],
     ];
     $build['controls']['wrapper-slider'] = [
       '#markup' => '<div id="dateSlider"></div>',
       '#allowed_tags' => ['div'],
     ];
     $build['controls']['label-cal'] = [
-      '#markup' => '<label>' . t('Or, navigate on the calendar:') . '</label>',
-      '#allowed_tags' => ['label'],
+      '#markup' => '<strong><label>' . t('Or, navigate on the calendar:') . '</label></strong>',
+      '#suffix' => '<br>',
+      '#allowed_tags' => ['label', 'strong'],
     ];
     $build['controls']['button-prev-month'] = [
       '#markup' => '<button title="previous month" class="prev-month btn btn-outline-secondary"><i id="arrow" class="arrow left"></i><i  id="arrow"  class="arrow left"></i></button>',
@@ -80,30 +81,30 @@ class IceChartsBlock extends BlockBase implements BlockPluginInterface {
     ];
 
     $build['table-wrapper'] = [
-      '#prefix' => '<div class="w3-container w3-center">',
-      '#markup' => '<br>',
+      '#prefix' => '<div class="w3-container w3-center w3-card-4 w3-padding-32" >',
       '#suffix' => '</div>'
     ];
 
     $build['table-wrapper']['table'] = [
-      '#prefix' => '<table class="w3-table w3-bordered">',
+      '#prefix' => '<table class="w3-table-all w3-centered">',
       '#suffix' => '</table>'
     ];
     $build['table-wrapper']['table']['header'] = [
-      '#prefix' => '<tr align="center">',
-      '#markup' => ' <th style="text-align:center">Colour</th><th style="text-align:center">Ice Categories (Total Concentration)</th>',
+      '#prefix' => '<tr class="w3-indigo" >',
+      '#markup' => '<th >Colour</th><th >Ice Categories (Total Concentration)</th>',
       '#suffix' => '</tr>'
     ];
     $build['table-wrapper']['table']['content'] = [
       '#markup' => '
-      <tr><td bgcolor= #969696></td><td style="text-align:center">Fast Ice (10/10th)</td></tr>
-      <tr><td bgcolor= #FF0000></td><td style="text-align:center">Very Close Drift Ice (9-10/10ths)</td></tr>
-      <tr><td bgcolor= #FF7D07></td><td style="text-align:center">Close Drift Ice (7-9/10ths)</td></tr>
-      <tr><td bgcolor= #FFFF00></td><td style="text-align:center">Open Drift Ice (4-7/10ths)</td></tr>
-      <tr><td bgcolor= #8CFFA0></td><td style="text-align:center">Very Open Drift Ice (1-4/10ths)</td></tr>
-      <tr><td bgcolor= #96c9ff></td><td style="text-align:center">Open Water (0-1/10ths)</td></tr>
+      <tr ><td bgcolor= #969696></td><td >Fast Ice (10/10th)</td></tr>
+      <tr ><td bgcolor= #FF0000></td><td >Very Close Drift Ice (9-10/10ths)</td></tr>
+      <tr ><td bgcolor= #FF7D07></td><td >Close Drift Ice (7-9/10ths)</td></tr>
+      <tr ><td bgcolor= #FFFF00></td><td >Open Drift Ice (4-7/10ths)</td></tr>
+      <tr ><td bgcolor= #8CFFA0></td><td >Very Open Drift Ice (1-4/10ths)</td></tr>
+      <tr ><td bgcolor= #96c9ff></td><td ">Open Water (0-1/10ths)</td></tr>
       '
     ];
+
     //Attach css and js
     $build['#attached'] = [
       'library' => [
