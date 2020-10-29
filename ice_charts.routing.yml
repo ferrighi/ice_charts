@@ -4,4 +4,4 @@ ice_charts:
     _controller: '\Drupal\ice_charts\Controller\IceChartsController::build'
     _title: 'Ice Charts Client'
   requirements:
-    _permission: 'accsess content'  
+    _permission: 'access content'
