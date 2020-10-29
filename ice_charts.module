@@ -3,7 +3,7 @@
 function ice_charts_help($path, $arg) {
   switch ($path) {
     case "help.page.ice_charts":
-      return t("This is a drupal module written with the purporse of showing the quicklooks of products from the OSI-SAF High Latitude processing center.");
+      return t("This is a drupal module for visualization of ice-charts on WMS.");
       break;
   }
 }
