@@ -1,8 +1,8 @@
 name: 'Ice Charts'
 description: 'Visualization of Ice Charts'
 type: module
-core: 8.x
-version: 1.x
+core_version_requirement: ^8.8 || ^9
+version: 1.0.1
 package: METNO
 #configure: landing_page_creator.admin_config_form
 dependencies:
