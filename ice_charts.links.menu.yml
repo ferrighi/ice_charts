@@ -1,0 +1,6 @@
+ice_charts:
+  title: 'Ice Charts Client'
+  description: 'Visualization of Ice Charts'
+  route_name: ice_charts
+  menu_name: main
+  weight: 0

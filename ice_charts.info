@@ -1,5 +1,0 @@
-name = Ice Charts
-description = "Display ice charts"
-core = 7.x
-
-dependencies[] = libraries

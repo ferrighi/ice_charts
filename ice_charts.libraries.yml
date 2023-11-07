@@ -1,0 +1,18 @@
+ice_charts:
+  version: 1.0
+  css:
+    theme:
+      css/ice_charts_style.css: {}
+      /libraries/openlayers5/css/ol.css: {}
+  js:
+    /libraries/openlayers5/build/ol.js: {}
+    /libraries/jquery-ui-timepicker/jquery.ui.timepicker.js: {}
+    https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js: { type: external }
+    js/ice_charts.js: {}
+  dependencies:
+    - core/jquery
+    - jquery_ui/core
+    - core/once
+    - core/drupal
+    - core/drupalSettings
+    - jquery_ui_datepicker/datepicker

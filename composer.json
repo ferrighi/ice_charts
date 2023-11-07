@@ -1,0 +1,10 @@
+{
+    "name": "metno/ice_charts",
+    "type": "drupal-custom-module",
+    "description": "Module for displaying ice charts on cryo.met.no",
+    "license": "GPL-3.0-or-later",
+    "scripts": {
+        "sniff": "phpcs --colors -n --standard=Drupal --extensions=php,module,yml src",
+        "snifferfix": "phpcbf --colors -n --standard=Drupal --extensions=php,module,yml src"
+    }
+}
