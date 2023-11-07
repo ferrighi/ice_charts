@@ -6,7 +6,7 @@ ice_charts:
       /libraries/openlayers5/css/ol.css: {}
   js:
     /libraries/openlayers5/build/ol.js: {}
-    /libraries/jquery.timepicker/jquery.timepicker.min.js: {}
+    /libraries/jquery-ui-timepicker/jquery.ui.timepicker.js: {}
     https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js: { type: external }
     js/ice_charts.js: {}
   dependencies:
@@ -15,3 +15,4 @@ ice_charts:
     - core/once
     - core/drupal
     - core/drupalSettings
+    - jquery_ui_datepicker/datepicker
