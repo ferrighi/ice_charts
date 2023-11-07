@@ -11,7 +11,7 @@ ice_charts:
     js/ice_charts.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.ui
-    - core/jquery.once
+    - jquery_ui/core
+    - core/once
     - core/drupal
     - core/drupalSettings

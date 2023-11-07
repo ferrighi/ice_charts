@@ -1,7 +1,10 @@
-(function($, Drupal) {
+(function($, Drupal, once) {
     Drupal.behaviors.iceChartClient = {
-      attach: function(context, settings) {
-        $('#map', context).each(function() {
+      attach: function(context) {
+        const mapEl = $(once('#map', '[data-ice-map]', context));
+        mapEl.each(function () {
+
+        //$('#map', context).each(function() {
           console.log("Beginning of ice_charts.js");
 
           //Initialize the date slider
@@ -208,4 +211,4 @@
       }
     };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

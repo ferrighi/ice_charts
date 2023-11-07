@@ -1,20 +1,12 @@
 <?php
-/*
- * @file
- * Contains \Drupal\ice_charts\Plugin\Block\IceChartsBlock
- *
- * BLock to show search map
- *
- */
+
 namespace Drupal\ice_charts\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Block\BlockPluginInterface;
-use Drupal\Core\Form\FormStateInterface;
-
 
 /**
- * Provides a Block.
+ * Provides an ice_charts block.
  *
  * @Block(
  *   id = "ice_charts_block",
@@ -26,24 +18,23 @@ use Drupal\Core\Form\FormStateInterface;
 class IceChartsBlock extends BlockBase implements BlockPluginInterface {
 
   /**
+   * Add js to block and return renderarray.
+   *
    * {@inheritdoc}
-   * Add js to block and return renderarray
    */
   public function build() {
-    \Drupal::logger('ice_charts')->debug("Building IceChartsBlock");
-
-    //Building the markup for the ice charts block.
+    // Building the markup for the ice charts block.
     $build['map-div'] = [
-      '#prefix' => '<div id="map" class="map">',
-      '#suffix' => '</div>'
+      '#prefix' => '<div data-ice-map id="map" class="map">',
+      '#suffix' => '</div>',
     ];
 
     $build['controls'] = [
       '#prefix' => '<div class="controls w3-container w3-panel w3-padding-16 w3-card-4">',
-      '#suffix' => '</div>'
+      '#suffix' => '</div>',
     ];
     $build['controls']['label-slider'] = [
-      '#markup' => '<strong><label>'. t('Select a date with the time slider:') . '</label></strong>',
+      '#markup' => '<strong><label>' . $this->t('Select a date with the time slider:') . '</label></strong>',
       '#allowed_tags' => ['label', 'strong'],
     ];
     $build['controls']['wrapper-slider'] = [
@@ -51,7 +42,7 @@ class IceChartsBlock extends BlockBase implements BlockPluginInterface {
       '#allowed_tags' => ['div'],
     ];
     $build['controls']['label-cal'] = [
-      '#markup' => '<strong><label>' . t('Or, navigate on the calendar:') . '</label></strong>',
+      '#markup' => '<strong><label>' . $this->t('Or, navigate on the calendar:') . '</label></strong>',
       '#suffix' => '<br>',
       '#allowed_tags' => ['label', 'strong'],
     ];
@@ -82,17 +73,17 @@ class IceChartsBlock extends BlockBase implements BlockPluginInterface {
 
     $build['table-wrapper'] = [
       '#prefix' => '<div class="w3-container w3-center w3-card-4 w3-padding-32" >',
-      '#suffix' => '</div>'
+      '#suffix' => '</div>',
     ];
 
     $build['table-wrapper']['table'] = [
       '#prefix' => '<table class="w3-table-all w3-centered">',
-      '#suffix' => '</table>'
+      '#suffix' => '</table>',
     ];
     $build['table-wrapper']['table']['header'] = [
       '#prefix' => '<tr class="w3-indigo" >',
       '#markup' => '<th >Colour</th><th >Ice Categories (Total Concentration)</th>',
-      '#suffix' => '</tr>'
+      '#suffix' => '</tr>',
     ];
     $build['table-wrapper']['table']['content'] = [
       '#markup' => '
@@ -102,17 +93,17 @@ class IceChartsBlock extends BlockBase implements BlockPluginInterface {
       <tr ><td bgcolor= #FFFF00></td><td >Open Drift Ice (4-7/10ths)</td></tr>
       <tr ><td bgcolor= #8CFFA0></td><td >Very Open Drift Ice (1-4/10ths)</td></tr>
       <tr ><td bgcolor= #96c9ff></td><td ">Open Water (0-1/10ths)</td></tr>
-      '
+      ',
     ];
 
-    //Attach css and js
+    // Attach css and js.
     $build['#attached'] = [
       'library' => [
-        'ice_charts/ice_charts'
+        'ice_charts/ice_charts',
       ],
     ];
     return $build;
 
-
   }
+
 }
